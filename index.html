@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doorashada Codeynta Xaafadda</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#eef5ff;
+padding:20px;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+}
+
+header{
+text-align:center;
+margin-bottom:30px;
+}
+
+header h1{
+color:#0d47a1;
+font-size:35px;
+margin-bottom:10px;
+}
+
+header p{
+color:#555;
+font-size:18px;
+}
+
+.form-box{
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+margin-bottom:30px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+input[type=text], input[type=password]{
+width:100%;
+padding:14px;
+font-size:17px;
+border:2px solid #0d47a1;
+border-radius:8px;
+outline:none;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-bottom: 30px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+text-align:center;
+}
+
+.card img{
+width:150px;
+height:150px;
+border-radius:50%;
+object-fit:cover;
+background:#ddd;
+margin-bottom:15px;
+display: inline-block;
+}
+
+.card input[type=file]{
+margin-bottom:15px;
+width: 100%;
+}
+
+.card h2{
+font-size:22px;
+margin-bottom:15px;
+color:#222;
+}
+
+.card button{
+background:#16a34a;
+color:white;
+padding:12px 30px;
+font-size:17px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+transition:.3s;
+width: 100%;
+}
+
+.card button:hover{
+background:#15803d;
+}
+
+.admin-trigger-container {
+text-align: center;
+margin-top: 40px;
+margin-bottom: 20px;
+}
+
+.admin-trigger-btn {
+background: #0d47a1;
+color: white;
+padding: 12px 25px;
+font-size: 16px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+}
+
+.admin-login-box {
+background: #fff;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0,0,0,.1);
+max-width: 400px;
+margin: 20px auto;
+text-align: center;
+}
+
+.admin-login-box input {
+margin-bottom: 15px;
+}
+
+.admin-login-box button {
+background: #0d47a1;
+color: white;
+padding: 12px;
+font-size: 16px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+width: 100%;
+}
+
+.results-box, .logs-box {
+background: #fff;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0,0,0,.1);
+margin-top: 30px;
+}
+
+.results-box h2, .logs-box h2 {
+color: #0d47a1;
+margin-bottom: 15px;
+text-align: center;
+}
+
+.result-item {
+display: flex;
+justify-content: space-between;
+padding: 10px;
+border-bottom: 1px solid #eee;
+font-size: 18px;
+}
+
+.result-item span {
+font-weight: bold;
+color: #16a34a;
+}
+
+.log-item {
+padding: 12px;
+border-bottom: 1px solid #eee;
+font-size: 16px;
+color: #333;
+text-align: left;
+background: #fdfdfd;
+margin-bottom: 5px;
+border-radius: 4px;
+}
+
+.log-item strong {
+color: #0d47a1;
+}
+
+.log-item em {
+color: #16a34a;
+font-weight: bold;
+font-style: normal;
+}
+
+.log-item .time-span {
+float: right;
+color: #888;
+font-size: 13px;
+}
+
+.clear-btn {
+background: #dc2626;
+color: white;
+margin-top: 20px;
+padding: 10px 20px;
+font-size: 15px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+}
+
+footer{
+margin-top:40px;
+text-align:center;
+color:#777;
+font-size:15px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+<h1>Doorashada Codeynta Xaafadda</h1>
+<p>Fadlan geli Magaca Saddexan kadibna dooro musharraxa aad rabto.</p>
+</header>
+
+<div class="form-box">
+<label>Magaca Saddexan</label>
+<input type="text" id="magac" placeholder="Tusaale: Ahmed Mahad Ali">
+</div>
+
+<div class="grid">
+<div class="card">
+<img id="img1" src="https://via.placeholder.com/150" alt="Sawirka">
+<input type="file" accept="image/*" onchange="uploadImage(event,'img1')">
+<h2>Abdalle Mohamud Mohamed</h2>
+<button class="vote-btn" onclick="codee('Abdalle Mohamud Mohamed')">Codee</button>
+</div>
+
+<div class="card">
+<img id="img2" src="https://via.placeholder.com/150" alt="Sawirka">
+<input type="file" accept="image/*" onchange="uploadImage(event,'img2')">
+<h2>Farah Khalif Abdi</h2>
+<button class="vote-btn" onclick="codee('Farah Khalif Abdi')">Codee</button>
+</div>
+
+<div class="card">
+<img id="img3" src="https://via.placeholder.com/150" alt="Sawirka">
+<input type="file" accept="image/*" onchange="uploadImage(event,'img3')">
+<h2>Ahmed Mahad Ali</h2>
+<button class="vote-btn" onclick="codee('Ahmed Mahad Ali')">Codee</button>
+</div>
+</div>
+
+<!-- Badhanka Maamulka -->
+<div class="admin-trigger-container">
+    <button class="admin-trigger-btn" onclick="muujiLoginFoomka()">Gali Qaybta Maamulka (Admin)</button>
+</div>
+
+<!-- Login Box-ka Admin-ka -->
+<div class="admin-login-box" id="admin-login-form" style="display: none;">
+    <h3>Gali Password-ka Admin-ka</h3>
+    <br>
+    <input type="password" id="admin-password" placeholder="Geli Password-ka">
+    <button onclick="HubiAdminLogin()">Gali Dashboard</button>
+</div>
+
+<!-- QAYBTA ADMIN-KA -->
+<div id="qaybta-admin-dashboard" style="display: none;">
+    <div class="results-box">
+        <h2>Natiijada Codeynta (Admin View)</h2>
+        <div class="result-item">Abdalle Mohamud Mohamed: <span id="votes-abdalle">0 Cod (0%)</span></div>
+        <div class="result-item">Farah Khalif Abdi: <span id="votes-farah">0 Cod (0%)</span></div>
+        <div class="result-item">Ahmed Mahad Ali: <span id="votes-ahmed">0 Cod (0%)</span></div>
+        <div class="result-item" style="background: #f0f7ff; font-weight: bold;">Isgaynka Guud ee Codadka: <span id="total-votes" style="color:#0d47a1;">0 Cod</span></div>
+    </div>
+
+    <div class="logs-box">
+        <h2>Liiska Dadka Codeeyay & Musharixiinta ay Doorteen</h2>
+        <div id="logs-container">
+            <p style="text-align:center; color:#999;">Weli cidna ma codeyn.</p>
+        </div>
+        <center><button class="clear-btn" onclick="dibUHabee()">Nadiifi Dhammaan Xogta (Reset All)</button></center>
+    </div>
+</div>
+
+<footer>
+© 2026 Doorashada Codeynta Xaafadda
+</footer>
+
+</div>
+
+<script>
+let votes = JSON.parse(localStorage.getItem("election_votes")) || {
+    "Abdalle Mohamud Mohamed": 0,
+    "Farah Khalif Abdi": 0,
+    "Ahmed Mahad Ali": 0
+};
+let votersLog = JSON.parse(localStorage.getItem("voters_log")) || [];
+let hasVoted = localStorage.getItem("hasVoted") === "true"; // Hubi nidaamka ammaanka mar kasta oo bogga la furo
+
+cusboonaysiiShaashadda();
+
+// Haddii uu qofku mar hore codeeyay, xir badhamada isla markaaba
+if (hasVoted) {
+    curyaamiBadhamada();
+}
+
+// 1. Sawirka Upload-ka
+function uploadImage(event, imageId) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById(imageId).src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+// 2. Badhanka Codeynta
+function codee(candidate) {
+    // Ammaanka 1: Haddii uu browser-ku xasuusto in la codeeyay
+    if (hasVoted) {
+        alert("Nidaamka Ammaanka: Kumbuyuutarkaan mar hore ayaa laga codeeyay!");
+        return;
+    }
+
+    const magaca = document.getElementById("magac").value.trim();
+
+    if (magaca === "") {
+        alert("Fadlan qor Magacaaga Saddexan ka hor intaanad codeyn!");
+        return;
+    }
+
+    const answer = confirm("Ma hubtaa inaad u codeyneyso:\n\n" + candidate + " ?");
+    if (!answer) return;
+
+    // Kordhi codka musharraxa
+    votes[candidate] += 1;
+
+    // Diiwaangeli magaca
+    const xogtaCodbixiyaha = {
+        fullName: magaca,
+        candidateChosen: candidate,
+        time: new Date().toLocaleTimeString()
+    };
+    votersLog.push(xogtaCodbixiyaha);
+
+    // Ku keydi LocalStorage nidaamka ammaanka
+    localStorage.setItem("election_votes", JSON.stringify(votes));
+    localStorage.setItem("voters_log", JSON.stringify(votersLog));
+    localStorage.setItem("hasVoted", "true"); // Halkan ayaa lagu xirayaa qofka
+    hasVoted = true;
+
+    // Cusboonaysii shaashadda oo curyaami badhamada
+    cusboonaysiiShaashadda();
+    curyaamiBadhamada();
+
+    alert("Waad ku mahadsan tahay codkaaga, " + magaca + "!");
+}
+
+function cusboonaysiiShaashadda() {
+    const total = votes["Abdalle Mohamud Mohamed"] + votes["Farah Khalif Abdi"] + votes["Ahmed Mahad Ali"];
+    
+    const helBoqolley = (musharaxVotes) => {
+        if (total === 0) return 0;
+        return Math.round((musharaxVotes / total) * 100);
+    };
+
+    document.getElementById("votes-abdalle").innerText = votes["Abdalle Mohamud Mohamed"] + " Cod (" + helBoqolley(votes["Abdalle Mohamud Mohamed"]) + "%)";
+    document.getElementById("votes-farah").innerText = votes["Farah Khalif Abdi"] + " Cod (" + helBoqolley(votes["Farah Khalif Abdi"]) + "%)";
+    document.getElementById("votes-ahmed").innerText = votes["Ahmed Mahad Ali"] + " Cod (" + helBoqolley(votes["Ahmed Mahad Ali"]) + "%)";
+    document.getElementById("total-votes").innerText = total + " Cod";
+
+    const logsContainer = document.getElementById("logs-container");
+    if (votersLog.length === 0) {
+        logsContainer.innerHTML = '<p style="text-align:center; color:#999;">Weli cidna ma codeyn.</p>';
+    } else {
+        logsContainer.innerHTML = "";
+        votersLog.forEach((log, index) => {
+            const div = document.createElement("div");
+            div.className = "log-item";
+            div.innerHTML = (index + 1) + ". Codbixiye: <strong>" + log.fullName + "</strong> wuxuu u codeeyay: <em>" + log.candidateChosen + "</em> <span class=\"time-span\">Saacadda: " + log.time + "</span>";
+            logsContainer.appendChild(div);
+        });
+    }
+}
+
+// Shaqada curyaaminta badhamada (Locking the Buttons)
+function curyaamiBadhamada() {
+    const buttons = document.querySelectorAll(".vote-btn");
+    buttons.forEach(function(btn) {
+        btn.disabled = true;
+        btn.style.background = "gray";
+        btn.style.cursor = "not-allowed";
+        btn.innerText = "Xiran (Voted)";
+    });
+}
+
+// 3. Admin Panel Control
+function muujiLoginFoomka() {
+    const foomka = document.getElementById("admin-login-form");
+    if (foomka.style.display === "block") {
+        foomka.style.display = "none";
+    } else {
+        foomka.style.display = "block";
+    }
+}
+
+function HubiAdminLogin() {
+    const passwordGaliyay = document.getElementById("admin-password").value;
+    const passwordKaSaxdaAh = "Admin123"; 
+
+    if (passwordGaliyay === passwordKaSaxdaAh) {
+        document.getElementById("qaybta-admin-dashboard").style.display = "block"; 
+        document.getElementById("admin-login-form").style.display = "none"; 
+        alert("Ku soo dhawaada qaybta maamulka!");
+    } else {
+        alert("Password-ku waa khalad!");
+    }
+}
+
+function dibUHabee() {
+    if(confirm("Ma hubtaa inaad tirtirto dhammaan codadka iyo liiska si dib loogu bilaabo eber?")) {
+        localStorage.clear();
+        location.reload();
+    }
+}
+</script>
+
+</body>
+</html>
