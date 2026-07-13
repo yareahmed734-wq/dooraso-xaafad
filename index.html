@@ -64,32 +64,28 @@ outline:none;
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
 margin-bottom: 30px;
 }
 
 .card{
 background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,.1);
+padding:25px;
+border-radius:12px;
+box-shadow:0 4px 15px rgba(0,0,0,.08);
 text-align:center;
 }
 
 .card img{
-width:150px;
-height:150px;
-border-radius:50%;
+width:180px;
+height:220px;
+border-radius:10px;
 object-fit:cover;
 background:#ddd;
 margin-bottom:15px;
 display: inline-block;
-}
-
-.card input[type=file]{
-margin-bottom:15px;
-width: 100%;
+border: 3px solid #0d47a1;
 }
 
 .card h2{
@@ -108,6 +104,7 @@ border-radius:8px;
 cursor:pointer;
 transition:.3s;
 width: 100%;
+font-weight: bold;
 }
 
 .card button:hover{
@@ -243,23 +240,23 @@ font-size:15px;
 </div>
 
 <div class="grid">
+<!-- Musharax 1 -->
 <div class="card">
-<img id="img1" src="https://via.placeholder.com/150" alt="Sawirka">
-<input type="file" accept="image/*" onchange="uploadImage(event,'img1')">
+<img src="https://i.postimg.co.cc/T3P5p4zV/cabdalle.jpg" alt="Abdalle Mohamud Mohamed">
 <h2>Abdalle Mohamud Mohamed</h2>
 <button class="vote-btn" onclick="codee('Abdalle Mohamud Mohamed')">Codee</button>
 </div>
 
+<!-- Musharax 2 -->
 <div class="card">
-<img id="img2" src="https://via.placeholder.com/150" alt="Sawirka">
-<input type="file" accept="image/*" onchange="uploadImage(event,'img2')">
+<img src="https://i.postimg.co.cc/bvvCWh4m/faarax.jpg" alt="Farah Khalif Abdi">
 <h2>Farah Khalif Abdi</h2>
 <button class="vote-btn" onclick="codee('Farah Khalif Abdi')">Codee</button>
 </div>
 
+<!-- Musharax 3 -->
 <div class="card">
-<img id="img3" src="https://via.placeholder.com/150" alt="Sawirka">
-<input type="file" accept="image/*" onchange="uploadImage(event,'img3')">
+<img src="https://i.postimg.co.cc/kGPpX7y4/axmed.jpg" alt="Ahmed Mahad Ali">
 <h2>Ahmed Mahad Ali</h2>
 <button class="vote-btn" onclick="codee('Ahmed Mahad Ali')">Codee</button>
 </div>
@@ -310,32 +307,17 @@ let votes = JSON.parse(localStorage.getItem("election_votes")) || {
     "Ahmed Mahad Ali": 0
 };
 let votersLog = JSON.parse(localStorage.getItem("voters_log")) || [];
-let hasVoted = localStorage.getItem("hasVoted") === "true"; // Hubi nidaamka ammaanka mar kasta oo bogga la furo
+let hasVoted = localStorage.getItem("hasVoted") === "true";
 
 cusboonaysiiShaashadda();
 
-// Haddii uu qofku mar hore codeeyay, xir badhamada isla markaaba
 if (hasVoted) {
     curyaamiBadhamada();
 }
 
-// 1. Sawirka Upload-ka
-function uploadImage(event, imageId) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        document.getElementById(imageId).src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-}
-
-// 2. Badhanka Codeynta
 function codee(candidate) {
-    // Ammaanka 1: Haddii uu browser-ku xasuusto in la codeeyay
     if (hasVoted) {
-        alert("Nidaamka Ammaanka: Kumbuyuutarkaan mar hore ayaa laga codeeyay!");
+        alert("Nidaamka Ammaanka: Kumbuyuutarkaan/Telefoonkaan mar hore ayaa laga codeeyay!");
         return;
     }
 
@@ -349,10 +331,8 @@ function codee(candidate) {
     const answer = confirm("Ma hubtaa inaad u codeyneyso:\n\n" + candidate + " ?");
     if (!answer) return;
 
-    // Kordhi codka musharraxa
     votes[candidate] += 1;
 
-    // Diiwaangeli magaca
     const xogtaCodbixiyaha = {
         fullName: magaca,
         candidateChosen: candidate,
@@ -360,13 +340,11 @@ function codee(candidate) {
     };
     votersLog.push(xogtaCodbixiyaha);
 
-    // Ku keydi LocalStorage nidaamka ammaanka
     localStorage.setItem("election_votes", JSON.stringify(votes));
     localStorage.setItem("voters_log", JSON.stringify(votersLog));
-    localStorage.setItem("hasVoted", "true"); // Halkan ayaa lagu xirayaa qofka
+    localStorage.setItem("hasVoted", "true");
     hasVoted = true;
 
-    // Cusboonaysii shaashadda oo curyaami badhamada
     cusboonaysiiShaashadda();
     curyaamiBadhamada();
 
@@ -400,7 +378,6 @@ function cusboonaysiiShaashadda() {
     }
 }
 
-// Shaqada curyaaminta badhamada (Locking the Buttons)
 function curyaamiBadhamada() {
     const buttons = document.querySelectorAll(".vote-btn");
     buttons.forEach(function(btn) {
@@ -411,14 +388,9 @@ function curyaamiBadhamada() {
     });
 }
 
-// 3. Admin Panel Control
 function muujiLoginFoomka() {
     const foomka = document.getElementById("admin-login-form");
-    if (foomka.style.display === "block") {
-        foomka.style.display = "none";
-    } else {
-        foomka.style.display = "block";
-    }
+    foomka.style.display = (foomka.style.display === "block") ? "none" : "block";
 }
 
 function HubiAdminLogin() {
