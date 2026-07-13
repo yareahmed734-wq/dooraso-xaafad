@@ -318,7 +318,7 @@ if (hasVoted) {
 }
 
 function codee(candidate) {
-    if (hasVoted) {
+if (hasVoted) {
         alert("Nidaamka Ammaanka: Kumbuyuutarkaan/Telefoonkaan mar hore ayaa laga codeeyay!");
         return;
     }
@@ -330,28 +330,40 @@ function codee(candidate) {
         return;
     }
 
-    const answer = confirm("Ma hubtaa inaad u codeyneyso:\n\n" + candidate + " ?");
+    // Hubinta inuu qofku hubo doorashadiisa
+    const answer = confirm(Ma hubtaa inaad u codeyneyso: ${candidate}?);
     if (!answer) return;
 
-    votes[candidate] += 1;
+    // 1. U dir xogta Supabase database
+    const response = await fetch(${SUPABASE_URL}/rest/v1/votes, {
+        method: "POST",
+        headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": Bearer ${SUPABASE_KEY},
+            "Content-Type": "application/json",
+            "Prefer": "return=representation"
+        },
+        body: JSON.stringify({
+            voter_name: magaca,        // Magaca qofka codeeyay
+            candidate_chosen: candidate // Musharaxa uu doortay
+        })
+    });
 
-    const xogtaCodbixiyaha = {
-        fullName: magaca,
-        candidateChosen: candidate,
-        time: new Date().toLocaleTimeString()
-    };
-    votersLog.push(xogtaCodbixiyaha);
+    if (response.ok) {
+        // 2. LocalStorage u calaamadee inuu codeeyay
+        localStorage.setItem("hasVoted", "true");
+        hasVoted = true;
+        
+        alert(Waad ku mahadsan tahay! ${magaca}, codkaaga aad siisay ${candidate} si guul leh ayaa loo kaydiyay.);
+        
+        curyaamiBadhamada();
+        cusboonaysiiShaashadda();
+    } else {
+        alert("Waan ka xumahay, cilad ayaa ku timid kaydinta codka nidaamka Supabase. Mar kale isku day!");
+    }
+} 
 
-    localStorage.setItem("election_votes", JSON.stringify(votes));
-    localStorage.setItem("voters_log", JSON.stringify(votersLog));
-    localStorage.setItem("hasVoted", "true");
-    hasVoted = true;
-
-    cusboonaysiiShaashadda();
-    curyaamiBadhamada();
-
-    alert("Waad ku mahadsan tahay codkaaga, " + magaca + "!");
-}
+ 
 
 function cusboonaysiiShaashadda() {
     const total = votes["Abdalle Mohamud Mohamed"] + votes["Farah Khalif Abdi"] + votes["Ahmed Mahad Ali"];
